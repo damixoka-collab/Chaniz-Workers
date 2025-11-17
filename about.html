@@ -1,47 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | Chaniz Workers</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f3f6fa; }
-    .navbar { background: #002a5c; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
-    .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
-    .navbar a:hover { text-decoration: underline; }
-
-    .container { max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); line-height: 1.6; }
-    h2 { text-align: center; color: #002a5c; margin-bottom: 20px; }
-
-    footer { background: #002a5c; color: white; text-align: center; padding: 15px 0; margin-top: 40px; font-size: 14px; }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo"><img src="images/logo.png" style="height:40px;"></div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="find-job.html">Find a Job</a>
-      <a href="post-job.html">Post a Job</a>
-      <a href="subscribe.html">Subscribe</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Chaniz Logo">
+        <h1>Chaniz Workers Production & Supply Co. Ltd.</h1>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="find-job.html">Find a Job</a>
+        <a href="post-job.html">Post a Job</a>
+        <a href="subscribe.html">Subscribe</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <div class="container">
-    <h2>About Chaniz Workers</h2>
-    <p><strong>Chaniz Workers</strong> is a digital platform created under <strong>Chaniz Company Ltd</strong> with the mission of connecting workers and employers across Tanzania. We aim to provide a simple, reliable, and modern way for people to find job opportunities and for companies to reach qualified workers quickly.</p>
+  <section class="hero about-hero" style="background-image:url('https://images.unsplash.com/photo-1581091012184-5c44c39c0b5c?auto=format&fit=crop&w=1500&q=80');">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h2>Who We Are</h2>
+      <p>Empowering Workforces, Building Futures</p>
+    </div>
+  </section>
 
-    <p>Founded in <strong>Dodoma, Ntyuka</strong>, our goal is to support local employment growth by offering digital tools that simplify recruitment, communication, and opportunity sharing. Whether you are an employer looking for skilled labor or a job seeker searching for your next opportunity, Chaniz Workers is here to help.</p>
+  <main class="container">
+    <section>
+      <h2>About Chaniz Workers</h2>
+      <p>Chaniz Workers Production and Supply Co. Ltd. is a professional workforce connection and training company based in Tanzania. We specialize in linking skilled workers with employers across Africa and beyond, ensuring quality recruitment and development.</p>
+    </section>
 
-    <p>We also offer subscription options, giving users access to premium features such as unlimited job postings and priority listing placements. As the platform continues to grow, we aim to expand into training, worker verification, and more digital services to empower the Tanzanian workforce.</p>
+    <section class="mission">
+      <h2>Our Mission & Vision</h2>
+      <p><strong>Mission:</strong> To empower individuals with the right skills and connect them with employment opportunities globally.</p>
+      <p><strong>Vision:</strong> To be Africa’s leading recruitment and workforce development platform.</p>
+    </section>
 
-    <p>If you have any questions or suggestions, feel free to contact us anytime using the details on the Contact page.</p>
-  </div>
+    <section class="team">
+      <h2>Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1603415526960-f7e0328ad8b3?auto=format&fit=crop&w=500&q=60" alt="">
+          <h4>John Doe</h4>
+          <p>Founder & CEO</p>
+        </div>
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=60" alt="">
+          <h4>Jane Smith</h4>
+          <p>HR & Training Manager</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects">
+      <h2>Our Projects</h2>
+      <div class="project-grid">
+        <div class="project-item">Skilled Construction Workers – Kenya</div>
+        <div class="project-item">Hotel Staff Recruitment – Zanzibar</div>
+        <div class="project-item">Security & Drivers – Dubai</div>
+      </div>
+    </section>
+
+    <section class="clients">
+      <h2>Our Clients</h2>
+      <p>We proudly serve hospitality, construction, and logistics industries with dedicated, well-trained staff.</p>
+      <div class="client-logos">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=200&q=60" alt="">
+        <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=200&q=60" alt="">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=200&q=60" alt="">
+      </div>
+    </section>
+  </main>
 
   <footer>
-    © 2025 Chaniz Workers | All rights reserved | <a href="terms.html" style="color:white;">Terms</a> | <a href="privacy.html" style="color:white;">Privacy</a> | <a href="refund.html" style="color:white;">Refund</a>
+    <p>© 2025 Chaniz Workers Production & Supply Co. Ltd.</p>
   </footer>
 </body>
 </html>
