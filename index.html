@@ -1,46 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chaniz Workers | Home</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f3f6fa; }
-    .navbar { background: #002a5c; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
-    .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
-    .navbar a:hover { text-decoration: underline; }
-    .hero { padding: 80px 20px; text-align: center; background: #002a5c; color: white; }
-    .hero h1 { font-size: 40px; margin-bottom: 10px; }
-    .hero p { font-size: 18px; margin-top: 0; }
-    .buttons a { background: white; color: #002a5c; padding: 12px 20px; border-radius: 6px; margin: 10px; display: inline-block; text-decoration: none; font-weight: bold; }
-    .buttons a:hover { background: #d9e4f5; }
-    footer { background: #002a5c; color: white; text-align: center; padding: 15px 0; margin-top: 40px; font-size: 14px; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chaniz Workers Production and Supply Co. Ltd.</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo"><img src="images/logo.png" style="height:40px;"></div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="find-job.html">Find a Job</a>
-      <a href="post-job.html">Post a Job</a>
-      <a href="subscribe.html">Subscribe</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Chaniz Workers Logo">
+        <div>
+          <h1>Chaniz Workers Production & Supply Co. Ltd.</h1>
+          <p class="slogan">Empowering Workforces, Building Futures</p>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="find-job.html">Find a Job</a>
+        <a href="post-job.html">Post a Job</a>
+        <a href="subscribe.html">Subscribe</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <div class="hero">
-    <h1>Welcome to Chaniz Workers</h1>
-    <p>Your trusted platform for finding workers and posting jobs in Tanzania.</p>
-    <div class="buttons">
-      <a href="find-job.html">Find a Job</a>
-      <a href="post-job.html">Post a Job</a>
+  <!-- Hero -->
+  <section class="hero" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1500&q=80');">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h2>Connecting Employers and Job Seekers Across Africa</h2>
+      <p>Join thousands of skilled professionals and trusted employers through our platform.</p>
+      <div class="buttons">
+        <a href="find-job.html" class="btn">Find a Job</a>
+        <a href="post-job.html" class="btn">Post a Job</a>
+        <a href="subscribe.html" class="btn subscribe">Subscribe</a>
+      </div>
     </div>
-  </div>
+  </section>
 
+  <!-- Services -->
+  <section class="services container">
+    <h2>Our Services</h2>
+    <div class="service-grid">
+      <div class="service-item">
+        <img src="https://images.unsplash.com/photo-1581093588401-22b9ac0a2c69?auto=format&fit=crop&w=800&q=60" alt="">
+        <h3>Job Recruitment</h3>
+        <p>We connect companies with qualified candidates across Africa, ensuring the right talent for the right job.</p>
+      </div>
+      <div class="service-item">
+        <img src="https://images.unsplash.com/photo-1573164574393-9d3d6e6812c3?auto=format&fit=crop&w=800&q=60" alt="">
+        <h3>Candidates Training</h3>
+        <p>We train job seekers to meet international standards, boosting their career readiness.</p>
+      </div>
+      <div class="service-item">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=60" alt="">
+        <h3>CV & Cover Letter Writing</h3>
+        <p>We help applicants craft professional CVs and cover letters that stand out to employers.</p>
+      </div>
+      <div class="service-item">
+        <img src="https://images.unsplash.com/photo-1556761175-129418cb2dfe?auto=format&fit=crop&w=800&q=60" alt="">
+        <h3>Contract & Part-Time Jobs</h3>
+        <p>We support all job types: full-time, part-time, and contractual employment opportunities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials container">
+    <h2>Testimonials</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <p>"I got my dream job through Chaniz Workers! They guided me from CV creation to interview."</p>
+        <h4>— Joseph, Dar es Salaam</h4>
+      </div>
+      <div class="testimonial">
+        <p>"As an employer, the platform made hiring quick and reliable. Great experience overall!"</p>
+        <h4>— Grace, HR Manager</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    © 2025 Chaniz Workers | All rights reserved | <a href="terms.html" style="color:white;">Terms</a> | <a href="privacy.html" style="color:white;">Privacy</a> | <a href="refund.html" style="color:white;">Refund</a>
+    <div class="container">
+      <p>© 2025 Chaniz Workers Production & Supply Co. Ltd.</p>
+      <p>Viano Street, Dodoma, Tanzania | <a href="mailto:damixoka@gmail.com">damixoka@gmail.com</a> | +255 763 287 846</p>
+    </div>
   </footer>
 </body>
 </html>
