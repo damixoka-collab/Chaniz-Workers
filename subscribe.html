@@ -1,47 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subscribe | Chaniz Workers</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f3f6fa; }
-    .navbar { background: #002a5c; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
-    .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
-    .navbar a:hover { text-decoration: underline; }
-
-    .container { max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    h2 { text-align: center; color: #002a5c; }
-    p { text-align: center; }
-
-    iframe { width: 100%; border: none; border-radius: 8px; margin-top: 20px; }
-
-    footer { background: #002a5c; color: white; text-align: center; padding: 15px 0; margin-top: 40px; font-size: 14px; }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo"><img src="images/logo.png" style="height:40px;"></div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="find-job.html">Find a Job</a>
-      <a href="post-job.html">Post a Job</a>
-      <a href="subscribe.html">Subscribe</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Chaniz Logo">
+        <h1>Chaniz Workers Production & Supply Co. Ltd.</h1>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="find-job.html">Find a Job</a>
+        <a href="post-job.html">Post a Job</a>
+        <a href="subscribe.html" class="active">Subscribe</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <div class="container">
-    <h2>Subscribe for Updates</h2>
-    <p>Stay informed with job opportunities and platform updates.</p>
-
-    <!-- Replace with your actual Google Form embed link -->
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdSubscribeForm?embedded=true" height="800"></iframe>
-  </div>
+  <main class="container">
+    <h2>Subscribe for Job Alerts</h2>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHyPzslsqm9hO_4oIEC2iJBez2KkQX9cMQXlqyEwoqIrnIuA/viewform?embedded=true"
+      width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+  </main>
 
   <footer>
-    © 2025 Chaniz Workers | All rights reserved | <a href="terms.html" style="color:white;">Terms</a> | <a href="privacy.html" style="color:white;">Privacy</a> | <a href="refund.html" style="color:white;">Refund</a>
+    <p>© 2025 Chaniz Workers Production & Supply Co. Ltd.</p>
   </footer>
 </body>
 </html>
