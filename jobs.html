@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Listings | Chaniz Workers</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .jobs-container { max-width: 1100px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .job-card { border-bottom: 1px solid #ddd; padding: 20px 0; }
+    .job-card:last-child { border-bottom: none; }
+    .job-title { font-size: 20px; font-weight: bold; color: #003366; }
+    .job-meta { color: #555; margin: 5px 0; }
+    .no-jobs { text-align: center; padding: 30px; color: #666; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Chaniz Workers Logo">
+        <div>
+          <h1>Chaniz Workers Production & Supply Co. Ltd.</h1>
+          <p class="slogan">Empowering Workforces, Building Futures</p>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="jobs.html" class="active">Job Board</a>
+        <a href="post-job.html">Post a Job</a>
+        <a href="subscribe.html">Subscribe</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1500&q=80'); height: 250px;">
+    <div class="overlay"></div>
+    <div class="hero-content small-hero">
+      <h2>Latest Job Openings</h2>
+    </div>
+  </section>
+
+  <!-- Job Listings -->
+  <section class="jobs-container">
+    <div id="jobs-list">Loading jobs...</div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Chaniz Workers Production & Supply Co. Ltd.</p>
+      <p>Viano Street, Dodoma, Tanzania | <a href="mailto:damixoka@gmail.com">damixoka@gmail.com</a> | +255 763 287 846</p>
+      <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a> | <a href="refund.html">Refund</a>
+    </div>
+  </footer>
+
+  <!-- Google Sheet JSON Script -->
+  <script>
+    const sheetURL = "https://docs.google.com/spreadsheets/d/1WEzaLdQJG5DvZ7x-9eyIcqG1XS9kkCKRgCJNPlGt8Qc/gviz/tq?tqx=out:json";
+
+    fetch(sheetURL)
+      .then(res => res.text())
+      .then(text => {
+        const json = JSON.parse(text.substr(47).slice(0, -2));
+        const rows = json.table.rows;
+        const container = document.getElementById("jobs-list");
+        container.innerHTML = "";
+
+        if (!rows.length) {
+          container.innerHTML = `<p class='no-jobs'>No jobs posted yet.</p>`;
+          return;
+        }
+
+        rows.forEach(row => {
+          let cells = row.c.map(c => c ? c.v : "");
+
+          const jobHTML = `
+            <div class='job-card'>
+              <div class='job-title'>${cells[0]}</div>
+              <div class='job-meta'><strong>Company:</strong> ${cells[1]}</div>
+              <div class='job-meta'><strong>Location:</strong> ${cells[2]}</div>
+              <div class='job-meta'><strong>Posted:</strong> ${cells[3]}</div>
+              <p>${cells[4]}</p>
+            </div>
+          `;
+
+          container.innerHTML += jobHTML;
+        });
+      })
+      .catch(err => {
+        document.getElementById("jobs-list").innerHTML = "Error loading jobs.";
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html>
