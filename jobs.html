@@ -1,13 +1,14 @@
 <script>
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/gviz/tq?tqx=out:json";
 
-
-
 fetch(sheetURL)
   .then(res => res.text())
   .then(text => {
     const json = JSON.parse(text.substr(47).slice(0, -2));
     const rows = json.table.rows;
+
+    console.log("RAW SHEET DATA:", rows); // <-- IMPORTANT
+
     const container = document.getElementById("jobs-list");
     container.innerHTML = "";
 
@@ -19,26 +20,10 @@ fetch(sheetURL)
     rows.forEach(row => {
       let cells = row.c.map(c => c ? c.v : "");
 
-      // Mapping your sheet columns:
-      const jobTitle = cells[6];      // Column G
-      const company = cells[2];       // Column C
-      const location = cells[12];     // Column M
-      const category = cells[7];      // Column H
-      const deadline = cells[13];     // Column N
+      console.log("ROW:", cells); // <-- SEE EXACT INDEXES
 
-      if (!jobTitle) return; // skip empty rows
-
-      const jobHTML = `
-        <div class='job-card'>
-          <div class='job-title'>${jobTitle}</div>
-          <div class='job-meta'><strong>Company:</strong> ${company}</div>
-          <div class='job-meta'><strong>Location:</strong> ${location}</div>
-          <div class='job-meta'><strong>Category:</strong> ${category}</div>
-          <div class='job-meta'><strong>Deadline:</strong> ${deadline}</div>
-        </div>
-      `;
-
-      container.innerHTML += jobHTML;
+      // TRY TEMPORARY CHECK:
+      container.innerHTML += JSON.stringify(cells) + "<br><br>";
     });
   })
   .catch(err => {
