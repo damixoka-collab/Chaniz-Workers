@@ -99,5 +99,69 @@
       </p>
     </div>
   </footer>
+  <script>
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/gviz/tq?tqx=out:json&gid=2107320552";
+
+fetch(sheetURL)
+  .then(res => res.text())
+  .then(text => {
+    const json = JSON.parse(text.substr(47).slice(0, -2));
+    const rows = json.table.rows;
+    const container = document.getElementById("job-cards");
+
+    rows.forEach(row => {
+      const cell = row.c.map(c => c ? c.v : "");
+
+      // Match your exact columns
+      const jobTitle = cell[6];
+      const company = cell[2];
+      const location = cell[11];
+      const category = cell[7];
+      const deadline = cell[12];
+      const salary = cell[10];
+      const requirements = cell[9];
+      const positions = cell[8];
+
+      if (!jobTitle) return;
+
+      const jobCard = `
+        <div style="
+          background:#ffffff;
+          padding:20px;
+          border-radius:10px;
+          margin:15px 0;
+          box-shadow:0 4px 10px rgba(0,0,0,0.1);
+          border-left:6px solid #007bff;
+        ">
+          <h3 style="margin:0 0 10px 0; color:#007bff;">${jobTitle}</h3>
+          
+          <p><strong>🏢 Company:</strong> ${company}</p>
+          <p><strong📍 Location:</strong> ${location}</p>
+          <p><strong>📂 Category:</strong> ${category}</p>
+          <p><strong>👥 Positions:</strong> ${positions || "Not specified"}</p>
+          <p><strong>💰 Salary:</strong> ${salary || "Not specified"}</p>
+          <p><strong>📝 Requirements:</strong> ${requirements || "None"}</p>
+          <p><strong>📅 Deadline:</strong> ${deadline || "Not provided"}</p>
+
+          <a href="#" style="
+            display:inline-block;
+            margin-top:10px;
+            padding:10px 20px;
+            background:#28a745;
+            color:white;
+            border-radius:5px;
+            text-decoration:none;
+          ">Apply Now</a>
+        </div>
+      `;
+
+      container.innerHTML += jobCard;
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("job-cards").innerHTML = "<p>Error loading cards.</p>";
+  });
+</script>
 </body>
 </html>
