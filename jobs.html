@@ -21,33 +21,18 @@
       margin: 0 auto;
     }
 
-    .job-card {
+    /* Make iframe responsive-ish */
+    .jobs-iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
       background: #ffffff;
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-      border-left: 4px solid #0b63ce;
     }
 
-    .job-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: #0b3566;
-    }
-
-    .job-meta {
-      font-size: 14px;
-      color: #444;
-      margin: 2px 0;
-    }
-
-    .no-jobs {
-      text-align: center;
-      padding: 30px 10px;
-      color: #666;
-      font-size: 15px;
+    @media (max-width: 768px) {
+      .jobs-iframe {
+        height: 500px;
+      }
     }
   </style>
 </head>
@@ -87,8 +72,12 @@
   <section class="jobs-section">
     <div class="container">
       <h2>Job Board</h2>
-      <div id="jobs-list" class="jobs-list">
-        Loading jobs...
+      <div class="jobs-list">
+        <!-- Embedded Google Sheet -->
+        <iframe
+          class="jobs-iframe"
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/pubhtml?gid=2107320552&single=true&widget=false&headers=false">
+        </iframe>
       </div>
     </div>
   </section>
@@ -108,71 +97,5 @@
       </p>
     </div>
   </footer>
-
-  <!-- Google Sheet → Job Board Script -->
-  <script>
-const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/gviz/tq?tqx=out:json&gid=2107320552";
-
-
-    function findIndexByKeyword(headers, keyword) {
-      keyword = keyword.toLowerCase();
-      return headers.findIndex(h => h && h.toLowerCase().includes(keyword));
-    }
-
-    fetch(sheetURL)
-      .then(res => res.text())
-      .then(text => {
-        const json = JSON.parse(text.substr(47).slice(0, -2));
-        const rows = json.table.rows;
-        const container = document.getElementById("jobs-list");
-        container.innerHTML = "";
-
-        if (!rows.length) {
-          container.innerHTML = "<p class='no-jobs'>No jobs posted yet.</p>";
-          return;
-        }
-
-        // First row = header
-        const headerCells = rows[0].c.map(c => (c && c.v ? c.v.toString().trim() : ""));
-
-        const idxTitle = findIndexByKeyword(headerCells, "job title");
-        const idxCompany = findIndexByKeyword(headerCells, "company");
-        const idxLocation = findIndexByKeyword(headerCells, "location");
-        const idxCategory = findIndexByKeyword(headerCells, "job category");
-        const idxDeadline = findIndexByKeyword(headerCells, "deadline");
-
-        rows.slice(1).forEach(row => {
-          const cells = row.c.map(c => (c && typeof c.v !== "undefined" ? c.v : ""));
-
-          const jobTitle = idxTitle >= 0 ? cells[idxTitle] : "";
-          const company = idxCompany >= 0 ? cells[idxCompany] : "";
-          const location = idxLocation >= 0 ? cells[idxLocation] : "";
-          const category = idxCategory >= 0 ? cells[idxCategory] : "";
-          const deadline = idxDeadline >= 0 ? cells[idxDeadline] : "";
-
-          if (!jobTitle) return;
-
-          const jobHTML = `
-            <div class="job-card">
-              <div class="job-title">${jobTitle}</div>
-              <div class="job-meta"><strong>Company:</strong> ${company}</div>
-              <div class="job-meta"><strong>Location:</strong> ${location}</div>
-              <div class="job-meta"><strong>Category:</strong> ${category}</div>
-              <div class="job-meta"><strong>Deadline:</strong> ${deadline}</div>
-            </div>
-          `;
-
-          container.innerHTML += jobHTML;
-        });
-
-        if (!container.innerHTML.trim()) {
-          container.innerHTML = "<p class='no-jobs'>No jobs posted yet.</p>";
-        }
-      })
-      .catch(err => {
-        document.getElementById("jobs-list").innerHTML = "Error loading jobs.";
-        console.error(err);
-      });
-  </script>
 </body>
 </html>
