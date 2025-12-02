@@ -106,7 +106,8 @@
   </footer>
 
   <script>
-const sheetURL = "https://docs.google.com/spreadsheets/d/1WEzaLdQJG5DvZ7x-9eyIcqG1XS9kkCKRgCJNPlGt8Qc/gviz/tq?gid=630716959&tqx=out:json";
+const sheetURL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/gviz/tq?tqx=out:json&gid=630716959";
 
 fetch(sheetURL)
   .then(res => res.text())
@@ -115,11 +116,10 @@ fetch(sheetURL)
     const rows = json.table.rows;
     const container = document.getElementById("job-cards");
 
-    container.innerHTML = "";
-
     rows.forEach(row => {
-      const c = row.c.map(cell => cell ? cell.v : "");
+      const c = row.c.map(cell => (cell ? cell.v : ""));
 
+      // Correct column matching
       const jobTitle = c[0];
       const company = c[1];
       const location = c[2];
@@ -130,22 +130,23 @@ fetch(sheetURL)
 
       if (!jobTitle) return;
 
-      container.innerHTML += `
-        <div class="job-card">
-          <h3>${jobTitle}</h3>
-          <p><strong>🏢 Company:</strong> ${company}</p>
-          <p><strong>📍 Location:</strong> ${location}</p>
-          <p><strong>📂 Category:</strong> ${category}</p>
-          <p><strong>👥 Positions:</strong> ${positions || "Not specified"}</p>
-          <p><strong>💰 Salary:</strong> ${salary || "Not specified"}</p>
-          <p><strong>📅 Deadline:</strong> ${deadline || "Not provided"}</p>
-          <a href="#" class="apply-btn">Apply Now</a>
-        </div>
+      const card = document.createElement("div");
+      card.className = "job-card";
+      card.innerHTML = `
+        <h3>${jobTitle}</h3>
+        <p><strong>🏢 Company:</strong> ${company}</p>
+        <p><strong>📍 Location:</strong> ${location}</p>
+        <p><strong>📂 Category:</strong> ${category}</p>
+        <p><strong>👥 Positions:</strong> ${positions || "Not specified"}</p>
+        <p><strong>💰 Salary:</strong> ${salary || "Not specified"}</p>
+        <p><strong>📅 Deadline:</strong> ${deadline || "Not provided"}</p>
+        <a href="#" class="apply-btn">Apply Now</a>
       `;
+      container.appendChild(card);
     });
   })
   .catch(err => {
-    console.error("Error loading jobs JSON:", err);
+    console.error("Error loading jobs:", err);
     document.getElementById("job-cards").innerHTML = "<p>Error loading jobs.</p>";
   });
 </script>
