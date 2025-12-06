@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Job Board | Chaniz Workers Production and Supply Co. Ltd.</title>
   <link rel="stylesheet" href="css/style.css">
+
   <style>
-    .jobs-section { padding: 40px 0 60px 0; }
+    .jobs-section { padding: 40px 0 60px; }
     .jobs-section h2 { text-align: center; margin-bottom: 25px; }
     .jobs-list { max-width: 1100px; margin: 0 auto; }
-    .jobs-iframe { width: 100%; height: 600px; border: none; background: #ffffff; }
-    @media (max-width: 768px) { .jobs-iframe { height: 500px; } }
 
-    /* Job-card styles */
-    .job-card {
+    .jobs-iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
       background: #ffffff;
+    }
+
+    .job-card {
+      background: #fff;
       padding: 20px;
       border-radius: 10px;
       margin: 15px 0;
@@ -22,24 +27,22 @@
       border-left: 6px solid #007bff;
     }
     .job-card h3 {
-      margin: 0 0 10px 0;
+      margin: 0 0 10px;
       color: #007bff;
     }
-    .job-card p {
-      margin: 4px 0;
-      line-height: 1.4;
-    }
-    .job-card .apply-btn {
+    .job-card p { margin: 4px 0; }
+    .apply-btn {
       display: inline-block;
       margin-top: 10px;
       padding: 10px 20px;
       background: #28a745;
-      color: white;
+      color: #fff;
       border-radius: 5px;
       text-decoration: none;
     }
   </style>
 </head>
+
 <body>
   <!-- Header -->
   <header>
@@ -51,6 +54,7 @@
           <p class="slogan">Empowering Workforces, Building Futures</p>
         </div>
       </div>
+
       <nav>
         <a href="index.html">Home</a>
         <a href="find-job.html">Find a Job</a>
@@ -63,7 +67,7 @@
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero" style="background-image:url('assets/Brewery%20image.jpeg');">
     <div class="overlay"></div>
     <div class="hero-content">
@@ -72,16 +76,17 @@
     </div>
   </section>
 
-  <!-- Job Listings -->
+  <!-- Job Listings Section -->
   <section class="jobs-section">
     <div class="container">
       <h2>Job Board</h2>
+
       <div class="jobs-list">
-        <!-- embedded original sheet as backup -->
+
+        <!-- ✅ Correct Published Sheet Embed -->
         <iframe
           class="jobs-iframe"
-          src= "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/gviz/tq?tqx=out:json&gid=630716959";
-
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/pubhtml?gid=630716959&single=true">
         </iframe>
 
         <h2 style="margin-top:50px; text-align:center;">Job Listings (Modern View)</h2>
@@ -99,78 +104,5 @@
         <a href="mailto:damixoka@gmail.com">damixoka@gmail.com</a> |
         +255 763 287 846
         <br>
-        <a href="terms.html">Terms &amp; Conditions</a> |
-        <a href="privacy.html">Privacy Policy</a> |
-        <a href="refund.html">Refund Policy</a>
-      </p>
-    </div>
-  </footer>
-<script>
-const sheetURL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/gviz/tq?tqx=out:json&gid=630716959";
-
-/* --- FIX DATE FORMAT ISSUE --- */
-function getCellValue(cell) {
-  if (!cell) return "";
-
-  // If formatted value exists (like "2025-01-12")
-  if (cell.f) return cell.f;
-
-  // If cell is like: Date(2025,0,12)
-  if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
-    const m = cell.v.match(/Date\((\d+),\s*(\d+),\s*(\d+)\)/);
-    if (m) {
-      const y = m[1];
-      const month = String(Number(m[2]) + 1).padStart(2, "0");
-      const day = String(m[3]).padStart(2, "0");
-      return `${y}-${month}-${day}`;
-    }
-  }
-
-  return cell.v;
-}
-
-fetch(sheetURL)
-  .then(res => res.text())
-  .then(text => {
-    const json = JSON.parse(text.substr(47).slice(0, -2));
-    const rows = json.table.rows;
-    const container = document.getElementById("job-cards");
-
-    rows.forEach(row => {
-      const c = row.c.map(getCellValue);
-
-      // Columns from your sheet
-      const jobTitle = c[0];
-      const company = c[1];
-      const location = c[2];
-      const category = c[3];
-      const positions = c[4];
-      const salary = c[5];
-      const deadline = c[6];
-
-      if (!jobTitle) return;
-
-      const card = document.createElement("div");
-      card.className = "job-card";
-      card.innerHTML = `
-        <h3>${jobTitle}</h3>
-        <p><strong>🏢 Company:</strong> ${company}</p>
-        <p><strong>📍 Location:</strong> ${location}</p>
-        <p><strong>📂 Category:</strong> ${category}</p>
-        <p><strong>👥 Positions:</strong> ${positions || "Not specified"}</p>
-        <p><strong>💰 Salary:</strong> ${salary || "Not specified"}</p>
-        <p><strong>📅 Deadline:</strong> ${deadline || "Not provided"}</p>
-        <a href="#" class="apply-btn">Apply Now</a>
-      `;
-      container.appendChild(card);
-    });
-  })
-  .catch(err => {
-    console.error("Error loading jobs:", err);
-    document.getElementById("job-cards").innerHTML = "<p>Error loading jobs.</p>";
-  });
-</script>
-
-</body>
-</html>
+        <a href="terms.html">Terms & Conditions</a> |
+        <a href="privacy.html">Privacy Policy</a
