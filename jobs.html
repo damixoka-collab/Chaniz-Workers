@@ -104,10 +104,30 @@
       </p>
     </div>
   </footer>
-
-  <script>
+<script>
 const sheetURL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/gviz/tq?tqx=out:json&gid=630716959";
+
+/* --- FIX DATE FORMAT ISSUE --- */
+function getCellValue(cell) {
+  if (!cell) return "";
+
+  // If formatted value exists (like "2025-01-12")
+  if (cell.f) return cell.f;
+
+  // If cell is like: Date(2025,0,12)
+  if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
+    const m = cell.v.match(/Date\((\d+),\s*(\d+),\s*(\d+)\)/);
+    if (m) {
+      const y = m[1];
+      const month = String(Number(m[2]) + 1).padStart(2, "0");
+      const day = String(m[3]).padStart(2, "0");
+      return `${y}-${month}-${day}`;
+    }
+  }
+
+  return cell.v;
+}
 
 fetch(sheetURL)
   .then(res => res.text())
@@ -117,9 +137,9 @@ fetch(sheetURL)
     const container = document.getElementById("job-cards");
 
     rows.forEach(row => {
-      const c = row.c.map(cell => (cell ? cell.v : ""));
+      const c = row.c.map(getCellValue);
 
-      // Correct column matching
+      // Columns from your sheet
       const jobTitle = c[0];
       const company = c[1];
       const location = c[2];
@@ -150,5 +170,6 @@ fetch(sheetURL)
     document.getElementById("job-cards").innerHTML = "<p>Error loading jobs.</p>";
   });
 </script>
+
 </body>
 </html>
