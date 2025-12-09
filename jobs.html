@@ -1,36 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Job Board | Chaniz Workers Production and Supply Co. Ltd.</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 
   <style>
-    .jobs-section { padding: 40px 0 60px; }
+    .jobs-section { padding: 40px 0 60px 0; }
     .jobs-section h2 { text-align: center; margin-bottom: 25px; }
     .jobs-list { max-width: 1100px; margin: 0 auto; }
-
-    .jobs-iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      background: #ffffff;
-    }
+    .jobs-iframe { width: 100%; height: 600px; border: none; background: #ffffff; }
 
     .job-card {
-      background: #fff;
+      background: #ffffff;
       padding: 20px;
       border-radius: 10px;
       margin: 15px 0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       border-left: 6px solid #007bff;
     }
-    .job-card h3 {
-      margin: 0 0 10px;
-      color: #007bff;
-    }
-    .job-card p { margin: 4px 0; }
+    .job-card h3 { margin: 0 0 10px 0; color: #007bff; }
+    .job-card p { margin: 4px 0; line-height: 1.4; }
     .apply-btn {
       display: inline-block;
       margin-top: 10px;
@@ -48,13 +39,12 @@
   <header>
     <div class="container header-container">
       <div class="logo">
-        <img src="assets/logo.png" alt="Chaniz Workers Logo">
+        <img src="assets/logo.png" alt="Chaniz Workers Logo" />
         <div>
           <h1>Chaniz Workers Production & Supply Co. Ltd.</h1>
           <p class="slogan">Empowering Workforces, Building Futures</p>
         </div>
       </div>
-
       <nav>
         <a href="index.html">Home</a>
         <a href="find-job.html">Find a Job</a>
@@ -62,12 +52,12 @@
         <a href="subscribe.html">Subscribe</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a href="jobs.html" class="active">Job Board</a>
+        <a class="active" href="jobs.html">Job Board</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero" style="background-image:url('assets/Brewery%20image.jpeg');">
     <div class="overlay"></div>
     <div class="hero-content">
@@ -76,22 +66,19 @@
     </div>
   </section>
 
-  <!-- Job Listings Section -->
+  <!-- Job Listings -->
   <section class="jobs-section">
     <div class="container">
       <h2>Job Board</h2>
 
-      <div class="jobs-list">
+      <!-- Backup iframe -->
+      <iframe
+        class="jobs-iframe"
+        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/pubhtml?gid=630716959&single=true"
+      ></iframe>
 
-        <!-- ✅ Correct Published Sheet Embed -->
-        <iframe
-          class="jobs-iframe"
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/pubhtml?gid=630716959&single=true">
-        </iframe>
-
-        <h2 style="margin-top:50px; text-align:center;">Job Listings (Modern View)</h2>
-        <div id="job-cards" style="max-width:1100px; margin:20px auto;"></div>
-      </div>
+      <h2 style="margin-top:50px; text-align:center;">Job Listings (Modern View)</h2>
+      <div id="job-cards" style="max-width:1100px; margin:20px auto;"></div>
     </div>
   </section>
 
@@ -102,7 +89,58 @@
       <p>
         Viano Street, Dodoma, Tanzania |
         <a href="mailto:damixoka@gmail.com">damixoka@gmail.com</a> |
-        +255 763 287 846
-        <br>
+        +255 763 287 846 <br />
         <a href="terms.html">Terms & Conditions</a> |
-        <a href="privacy.html">Privacy Policy</a
+        <a href="privacy.html">Privacy Policy</a> |
+        <a href="refund.html">Refund Policy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const sheetURL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2pf9XZb9Ck5PcU1KQDk_Wc6ujJQVPdvIqIq75etqQchIrrY0avbDjv8cZ1OqRo5Y6cks0qexAVrUx/gviz/tq?tqx=out:json&gid=630716959";
+
+    fetch(sheetURL)
+      .then((res) => res.text())
+      .then((text) => {
+        const json = JSON.parse(text.substring(47).slice(0, -2));
+        const rows = json.table.rows;
+        const container = document.getElementById("job-cards");
+
+        rows.forEach((row) => {
+          const c = row.c.map((cell) => (cell ? cell.v : ""));
+
+          const jobTitle = c[0];
+          const company = c[1];
+          const location = c[2];
+          const category = c[3];
+          const positions = c[4];
+          const salary = c[5];
+          const deadline = c[6];
+
+          if (!jobTitle) return;
+
+          const card = document.createElement("div");
+          card.className = "job-card";
+          card.innerHTML = `
+            <h3>${jobTitle}</h3>
+            <p><strong>🏢 Company:</strong> ${company}</p>
+            <p><strong>📍 Location:</strong> ${location}</p>
+            <p><strong>📂 Category:</strong> ${category}</p>
+            <p><strong>👥 Positions:</strong> ${positions || "Not specified"}</p>
+            <p><strong>💰 Salary:</strong> ${salary || "Not specified"}</p>
+            <p><strong>📅 Deadline:</strong> ${deadline || "Not provided"}</p>
+            <a href="#" class="apply-btn">Apply Now</a>
+          `;
+          container.appendChild(card);
+        });
+      })
+      .catch((err) => {
+        console.error("Error loading jobs:", err);
+        document.getElementById("job-cards").innerHTML =
+          "<p>Error loading jobs.</p>";
+      });
+  </script>
+</body>
+</html>
