@@ -241,4 +241,36 @@ footer a:hover {
   font-weight: bold;
   color: #333;
 }
+.about-us {
+  padding: 70px 0;
+  background: #ffffff;
+}
+
+.about-us h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.about-us p {
+  max-width: 900px;
+  margin: 0 auto 15px auto;
+  line-height: 1.7;
+  color: #333;
+}
+
+.about-values {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.about-values div {
+  background: #f1f3f5;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
 
