@@ -132,7 +132,13 @@ fetch(csvURL)
         <p><strong>👥 Positions:</strong> ${positions || "Not specified"}</p>
         <p><strong>💰 Salary:</strong> ${salary || "Not specified"}</p>
         <p><strong>📅 Deadline:</strong> ${deadline || "Not provided"}</p>
-        <a href="#" class="apply-btn">Apply Now</a>
+        <a 
+  href="https://wa.me/255737040825?text=Hello%20Chaniz%20Workers,%20I%20am%20interested%20in%20the%20${encodeURIComponent(jobTitle)}%20position%20at%20${encodeURIComponent(company)}%20in%20${encodeURIComponent(location)}."
+  class="apply-btn"
+  target="_blank">
+  Apply Now
+</a>
+
       `;
       container.appendChild(card);
     });
